@@ -66,3 +66,15 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### 自分で編集したコマンド（tsconfig.json）
+sourceMap: true ... コンパイル前後のファイルを結びつけ、bunlde.js を用いないデバッグが可能に
+target: es5 ... typescript を es5 にコンパイル
+jsx: react ... react 型の jsx を使用
+typeRoots: [types, node_modules/@types] ... 型定義ファイルのありかを定義
+
+### 自分で編集したコマンド（package.json）
+npm run start ... 元々は react-scripts start
+
+### 自分で編集したコマンド（tslint.json）
+variable-name: allow-pascal-case ... 変数名に hogeFuga だけでなく HogeFuga も使えるように
