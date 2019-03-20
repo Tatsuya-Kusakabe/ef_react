@@ -1,5 +1,5 @@
 import { default as React, Component, Fragment } from 'react';
-import { default as Header } from './header';
+import { Header } from './header';
 
 interface Props {}
 interface State {}
