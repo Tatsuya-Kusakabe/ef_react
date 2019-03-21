@@ -78,3 +78,4 @@ npm run start ... 元々は react-scripts start
 
 ### 自分で編集したコマンド（tslint.json）
 variable-name: allow-pascal-case ... 変数名に hogeFuga だけでなく HogeFuga も使えるように
+import-name: {...} ... 望み通りの名前で import できるように (https://github.com/Microsoft/tslint-microsoft-contrib/issues/451)
