@@ -26,8 +26,9 @@ export default {
 
         // 生の posts, users を組み合わせた、表示用のデータを作成する
         const postsWithUsers: PostWithUser[] = rawPosts.map((post: RawPost) => {
-          const user = rawUsers.find((user: RawUser) => user.id === post.user_id) || { name: '' };
-          return { ...post, name: user.name };
+          const user = rawUsers.find((user: RawUser) => user.id === post.user_id) ||
+            { name: '' , image: { url : '' } };
+          return { ...post, name: user.name, image: user.image.url };
         });
 
         // store への保存を発火する
