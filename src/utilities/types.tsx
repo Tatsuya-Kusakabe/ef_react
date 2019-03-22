@@ -4,10 +4,10 @@ export type Action = PostAction;
 
 export interface RawPost {
   id: number;
-  user_id: number;
+  userId: number;
   context: string;
-  created_at: Date;
-  updated_at: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface RawUser {
@@ -15,8 +15,8 @@ export interface RawUser {
   name: string;
   email: string;
   image: { url: string };
-  created_at: Date;
-  updated_at: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface PostWithUser extends RawPost {

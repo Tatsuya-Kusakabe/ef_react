@@ -1,4 +1,5 @@
 import { default as request } from 'superagent';
+import { camelizeKeys } from 'humps';
 import { Dispatcher } from '../dispatcher';
 import { ActionTypes, Host } from '../utilities/constants';
 import { RawPost, RawUser, PostWithUser } from '../utilities/types';
@@ -16,17 +17,17 @@ export default {
     request
     .get(`${Host.server.dev}/users`)
     .end((err: any, res: any) => {
-      const rawUsers: RawUser[] = JSON.parse(res.text);
+      const rawUsers = camelizeKeys(JSON.parse(res.text));
 
       // 生の microposts を取ってくる
       request
       .get(`${Host.server.dev}/microposts`)
       .end((err: any, res: any) => {
-        const rawPosts: RawPost[] = JSON.parse(res.text);
+        const rawPosts = camelizeKeys(JSON.parse(res.text));
 
         // 生の posts, users を組み合わせた、表示用のデータを作成する
         const postsWithUsers: PostWithUser[] = rawPosts.map((post: RawPost) => {
-          const user = rawUsers.find((user: RawUser) => user.id === post.user_id) ||
+          const user = rawUsers.find((user: RawUser) => user.id === post.userId) ||
             { name: '' , image: { url : '' } };
           return { ...post, name: user.name, image: user.image.url };
         });
