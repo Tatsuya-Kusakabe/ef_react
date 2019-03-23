@@ -1,15 +1,18 @@
-import { default as React, Component, Fragment } from 'react';
+import { default as React, Component } from 'react';
+import { default as styled } from 'styled-components';
 import { Header } from './header';
+import { Stream } from './stream';
 import { PostWithUser } from './../utilities/types';
 import { default as PostAction } from './../actions/post';
 import { default as PostStore } from './../stores/post';
 
 interface Props {}
+
 interface State {
   posts: PostWithUser[];
 }
 
-export default class Landing extends Component<Props, State> {
+export class Landing extends Component<Props, State> {
   onChangeHandler: () => void;
 
   constructor(props: Props) {
@@ -41,10 +44,16 @@ export default class Landing extends Component<Props, State> {
 
   render() {
     return (
-      <Fragment>
+      <Wrapper>
         <Header />
-        <div>Hi I am a landing page</div>
-      </Fragment>
+        <Stream { ...this.state } />
+      </Wrapper>
     );
   }
 }
+
+const Wrapper = styled('div')`
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(230, 236, 240);
+`;
