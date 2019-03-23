@@ -72,6 +72,9 @@ sourceMap: true ... コンパイル前後のファイルを結びつけ、bunlde
 target: es5 ... typescript を es5 にコンパイル
 jsx: react ... react 型の jsx を使用
 typeRoots: [types, node_modules/@types] ... 型定義ファイルのありかを定義
+noImplicitAny: true,
+noImplicitReturns: true,
+noUnusedLocals: true ... 詳細は右記 (http://neos21.hatenablog.com/entry/2017/10/24/080000)
 
 ### 自分で編集したコマンド（package.json）
 npm run start ... 元々は react-scripts start
