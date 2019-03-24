@@ -5,8 +5,8 @@ class BaseActionTypes {
 export const ActionTypes = new BaseActionTypes();
 
 export const Host = {
-  server: { dev: 'http://localhost:3001' },
-  client: { dev: 'http://localhost:3000' },
+  rails: { dev: 'http://localhost:3000' },
+  react: { dev: 'http://localhost:3002' },
 };
 
 export const TimeDiff = (datePosted: string): string => {

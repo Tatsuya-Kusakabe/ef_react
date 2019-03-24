@@ -15,13 +15,13 @@ export default {
   fetchPosts(): void {
     // 生の users を取ってくる
     request
-    .get(`${Host.server.dev}/users`)
+    .get(`${Host.rails.dev}/users`)
     .end((err: any, res: any) => {
       const rawUsers = camelizeKeys(JSON.parse(res.text));
 
       // 生の microposts を取ってくる
       request
-      .get(`${Host.server.dev}/microposts`)
+      .get(`${Host.rails.dev}/microposts`)
       .end((err: any, res: any) => {
         const rawPosts = camelizeKeys(JSON.parse(res.text));
 
