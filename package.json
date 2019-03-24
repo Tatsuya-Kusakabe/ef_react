@@ -11,6 +11,7 @@
     "flux": "^3.1.3",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-google-maps": "^9.4.5",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"
   },
@@ -30,6 +31,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/googlemaps": "^3.30.19",
     "@types/humps": "^1.1.2",
     "@types/keymirror": "^0.1.1",
     "change-case": "^3.1.0",
