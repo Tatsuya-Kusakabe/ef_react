@@ -78,6 +78,7 @@ noUnusedLocals: true ... 詳細は右記 (http://neos21.hatenablog.com/entry/201
 
 ### 自分で編集したコマンド（package.json）
 npm run start ... 元々は react-scripts start
+npm run start ... url 直接指定でルーティング可能に (https://router.vuejs.org/ja/guide/essentials/history-mode.html)
 
 ### 自分で編集したコマンド（tslint.json）
 variable-name: allow-pascal-case ... 変数名に hogeFuga だけでなく HogeFuga も使えるように
