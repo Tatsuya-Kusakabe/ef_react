@@ -1,12 +1,27 @@
 class BaseActionTypes {
   POST__FETCH_POSTS: 'POST__FETCH_POSTS' = 'POST__FETCH_POSTS';
+  MAP__FETCH_ALL_ROUTES: 'MAP__FETCH_ALL_ROUTES' = 'MAP__FETCH_ALL_ROUTES';
+  MAP__FETCH_ALL_NODES: 'MAP__FETCH_ALL_NODES' = 'MAP__FETCH_ALL_NODES';
 }
 
 export const ActionTypes = new BaseActionTypes();
 
 export const Host = {
   rails: { dev: 'http://localhost:3000' },
+  node:  { dev: 'http://localhost:3001' },
   react: { dev: 'http://localhost:3002' },
+};
+
+const UrlBase = {
+  googleMaps: 'http://maps.google.com/maps/api/js',
+};
+
+const UrlQuery = {
+  googleMaps: `key=${process.env.GOOGLE_MAPS_KEY}&language=ja&callback=googleMapsCallback`,
+};
+
+export const Url = {
+  googleMaps: `${UrlBase.googleMaps}?${UrlQuery.googleMaps}`,
 };
 
 export const TimeDiff = (datePosted: string): string => {
