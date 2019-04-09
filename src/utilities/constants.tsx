@@ -6,10 +6,22 @@ class BaseActionTypes {
 
 export const ActionTypes = new BaseActionTypes();
 
-export const Host = {
-  rails: { dev: 'http://localhost:3000' },
-  node:  { dev: 'http://localhost:3001' },
-  react: { dev: 'http://localhost:3002' },
+type Port = {
+  [key: string]: { [key: string]: string };
+};
+
+type Host = Port;
+
+export const env = process.env.NODE_ENV || 'development';
+
+export const Port: Port = {
+  node:  { development: '3001' },
+  react: { development: '3002' },
+};
+
+export const Host: Host = {
+  node:  { development: `https://expwy-footprints.com:${Port.node.development}` },
+  react: { development: `http://localhost:${Port.react.development}` },
 };
 
 const UrlBase = {

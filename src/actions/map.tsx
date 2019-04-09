@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { default as request } from 'superagent';
 import { Dispatcher } from '../dispatcher';
-import { ActionTypes, Host } from '../utilities/constants';
+import { ActionTypes, Host, env } from '../utilities/constants';
 import { RawRoute, RawRouteNode, RawNode, FormattedNode } from '../utilities/types';
 
 interface FetchAllRoutesAction {
@@ -50,7 +50,7 @@ const pushNodes = (accNode: FormattedNode[], node: RawNode, routeChunk: RouteChu
 export default {
   fetchAllRoutes(): void {
     request
-    .get(`${Host.node.dev}/api/routes`)
+    .get(`${Host.node[env]}/api/routes`)
     .end((err: any, res: any) => {
       const allRoutes = JSON.parse(res.text);
 
@@ -63,7 +63,7 @@ export default {
 
   fetchAllNodes(): void {
     request
-    .get(`${Host.node.dev}/api/nodes`)
+    .get(`${Host.node[env]}/api/nodes`)
     .end((err: any, res: any) => {
       const rawNodes: RawNode[] = JSON.parse(res.text);
 
