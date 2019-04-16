@@ -65,3 +65,5 @@ export interface FormattedNode {
   jointSequence: number | null;
   nodeSequence: number;
 }
+
+export type AuthLabel = 'name' | 'email' | 'password' | 'passwordConf';
