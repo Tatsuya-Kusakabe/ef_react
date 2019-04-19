@@ -1,6 +1,6 @@
-import { ActionTypes } from '../utilities/constants';
-import { Flash } from '../utilities/types';
 import { Dispatcher } from '../dispatcher';
+import { ActionTypes } from '../../src/utilities/constants';
+import { Flash } from '../../src/utilities/types';
 
 interface SetFlashAction {
   type: typeof ActionTypes.FLASH__SET_FLASH;

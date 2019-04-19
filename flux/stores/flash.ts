@@ -1,7 +1,7 @@
 import { Dispatcher } from '../dispatcher';
-import { ActionTypes } from '../utilities/constants';
-import { Action, Flash, FlashKeys } from '../utilities/types';
-import { BaseStore } from '../utilities/base_store';
+import { BaseStore } from '../base_store';
+import { ActionTypes } from '../../src/utilities/constants';
+import { Action, Flash, FlashKeys } from '../../src/utilities/types';
 
 class BaseFlashStore extends BaseStore {
   getFlashesObj(): Flash[] {

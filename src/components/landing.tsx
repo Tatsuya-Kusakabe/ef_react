@@ -3,8 +3,8 @@ import { default as styled } from 'styled-components';
 import { Header } from './header';
 import { Stream } from './stream';
 import { PostWithUser } from './../utilities/types';
-import { default as PostAction } from './../actions/post';
-import { default as PostStore } from './../stores/post';
+import { default as PostAction } from '../../flux/actions/post';
+import { default as PostStore } from '../../flux/stores/post';
 
 interface Props {}
 

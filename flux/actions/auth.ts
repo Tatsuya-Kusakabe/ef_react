@@ -1,8 +1,8 @@
 import { default as request } from 'superagent';
-import { ActionTypes, Host, env } from '../utilities/constants';
-import { Flash } from '../utilities/types';
 import { Dispatcher } from '../dispatcher';
-import { default as history } from '../utilities/history';
+import { ActionTypes, Host, env } from '../../src/utilities/constants';
+import { Flash } from '../../src/utilities/types';
+import { default as history } from '../../src/utilities/history';
 
 interface SignUpAction {
   type: typeof ActionTypes.AUTH__SIGN_UP;

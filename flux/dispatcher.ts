@@ -1,6 +1,6 @@
 import keyMirror from 'keymirror';
 import { Dispatcher as BaseDispatcher } from 'flux';
-import { Action } from './utilities/types';
+import { Action } from '../src/utilities/types';
 
 interface DispatcherPayload {
   source: string;
