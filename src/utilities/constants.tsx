@@ -5,6 +5,7 @@ class BaseActionTypes {
   AUTH__SIGN_UP: 'AUTH__SIGN_UP' = 'AUTH__SIGN_UP';
   AUTH__SIGN_IN: 'AUTH__SIGN_IN' = 'AUTH__SIGN_IN';
   AUTH__SIGN_OUT: 'AUTH__SIGN_OUT' = 'AUTH__SIGN_OUT';
+  FLASH__SET_FLASH: 'FLASH__SET_FLASH' = 'FLASH__SET_FLASH';
 }
 
 export const ActionTypes = new BaseActionTypes();

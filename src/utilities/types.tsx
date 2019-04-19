@@ -1,8 +1,10 @@
 import { AuthAction } from '../actions/auth';
+import { FlashAction } from '../actions/flash';
 import { PostAction } from '../actions/post';
 import { MapAction } from '../actions/map';
 
 export type Action = AuthAction
+  | FlashAction
   | PostAction
   | MapAction;
 
