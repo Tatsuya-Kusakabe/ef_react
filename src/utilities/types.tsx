@@ -1,7 +1,9 @@
-import { PostAction } from './../actions/post';
-import { MapAction } from './../actions/map';
+import { AuthAction } from '../actions/auth';
+import { PostAction } from '../actions/post';
+import { MapAction } from '../actions/map';
 
-export type Action = PostAction
+export type Action = AuthAction
+  | PostAction
   | MapAction;
 
 export interface RawPost {
@@ -67,3 +69,6 @@ export interface FormattedNode {
 }
 
 export type AuthLabel = 'name' | 'email' | 'password' | 'passwordConf';
+
+export type FlashKeys = 'auth';
+export type Flash = { [key in FlashKeys]: (string | null) };
