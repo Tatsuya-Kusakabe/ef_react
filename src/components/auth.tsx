@@ -5,6 +5,7 @@ import { Header } from './header';
 import { Input } from './input';
 import { Button } from './button';
 import { default as AuthAction } from '../actions/auth';
+import { default as FlashAction } from '../actions/flash';
 
 interface Props {
   status: 'signIn' | 'signUp';
@@ -34,32 +35,18 @@ export class Auth extends Component<Props, State> {
     const { status } = this.props;
     const passwordLength = 8;
 
-    if (status === 'signUp' && name === '') {
-      alert('名前を入力してください。');
-      return;
-    }
-    if (email === '') {
-      alert('メールアドレスを入力してください。');
-      return;
-    }
-    if (!email.match(/(.+)@([^.]+)\.([^.]+)/)) {
-      alert('メールアドレスの形式に誤りがあります。');
-      return;
-    }
-    if (password === '') {
-      alert('パスワードを入力してください。');
-      return;
-    }
-    if (password.length < passwordLength) {
-      alert(`パスワードは ${passwordLength} 文字以上にしてください。`);
-      return;
-    }
-    if (status === 'signUp' && passwordConf === '') {
-      alert('確認用のパスワードを入力してください。');
-      return;
-    }
-    if (status === 'signUp' && password !== passwordConf) {
-      alert('パスワードが一致していません。');
+    const alertMessage =
+        (!name.length && status === 'signUp')   ? '名前を入力してください。'
+      : (!email.length)                         ? 'メールアドレスを入力してください。'
+      : (!email.match(/(.+)@([^.]+)\.([^.]+)/)) ? 'メールアドレスの形式に誤りがあります。'
+      : (!password.length)                      ? 'パスワードを入力してください。'
+      : (password.length < passwordLength)      ? `パスワードは ${passwordLength} 文字以上にしてください。`
+      : (!passwordConf.length && status === 'signUp')      ? '確認用のパスワードを入力してください。'
+      : (password !== passwordConf && status === 'signUp') ? 'パスワードが一致していません。'
+      : null;
+
+    if (alertMessage) {
+      FlashAction.setFlash({ auth: alertMessage });
       return;
     }
 
