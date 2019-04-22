@@ -42,9 +42,12 @@ module.exports = {
   ],
 
   // 主な設定はこちらを参照 (https://qiita.com/riversun/items/d27f6d3ab7aaa119deab)
+  // ssl の設定はこちらを参照 (https://webpack.js.org/configuration/dev-server/#devserverhttps)
+  // key, cert は、webpack.config では読み込まれず、webpack-cli では読み込まれた（原因は不明）
   devServer: {
     open: true,
-    port: 3002,   // server を立ち上げたら、自動で localhost:3002/ を開く
+    host: 'expwy-footprints.com', // server を立ち上げたら、自動で expwy-footprints:443/ を開く
+    port: 443,
     inline: true, // dist 内の js が変更されたら、コンパイルして、自動でブラウザをリロード
     contentBase: path.resolve(__dirname, 'dist'),
     watchContentBase: true, // dist 内の html, css が変更されても、自動でブラウザをリロード

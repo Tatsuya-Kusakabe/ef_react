@@ -10,26 +10,19 @@ class BaseActionTypes {
 
 export const ActionTypes = new BaseActionTypes();
 
-type Port = {
+type Host = {
   [key: string]: { [key: string]: string };
 };
 
-type Host = Port;
-
 export const env = process.env.NODE_ENV || 'development';
 
-export const Port: Port = {
-  node:  { development: '3001' },
-  react: { development: '3002' },
-};
-
 export const Host: Host = {
-  node:  { development: `https://expwy-footprints.com:${Port.node.development}` },
-  react: { development: `http://localhost:${Port.react.development}` },
+  node:  { development: 'https://api.expwy-footprints.com' },
+  react: { development: 'https://expwy-footprints.com' },
 };
 
 const UrlBase = {
-  googleMaps: 'http://maps.google.com/maps/api/js',
+  googleMaps: 'https://maps.google.com/maps/api/js',
 };
 
 const UrlQuery = {

@@ -21,10 +21,13 @@
     "react-scripts": "2.1.8"
   },
   "scripts": {
-    "start": "webpack-dev-server --history-api-fallback",
+    "start": "webpack-dev-server --history-api-fallback --https --open 'Google Chrome' $npm_package_config_ca",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "config": {
+    "ca": "--key /private/etc/ssl/certs/expwy-footprints-key.pem --cert /private/etc/ssl/certs/expwy-footprints.pem"
   },
   "eslintConfig": {
     "extends": "react-app"
