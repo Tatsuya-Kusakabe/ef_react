@@ -1,6 +1,6 @@
 import { default as React, Fragment } from 'react';
 import { Router, Route } from 'react-router-dom';
-import { default as history } from './utilities/history';
+import { default as history } from '../utilities/history';
 import { Landing } from './components/landing';
 import { Map } from './components/map';
 import { Auth } from './components/auth';

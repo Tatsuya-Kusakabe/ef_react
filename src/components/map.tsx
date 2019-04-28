@@ -1,7 +1,7 @@
 import { default as React, Component } from 'react';
 import { default as styled } from 'styled-components';
-import { Url } from '../utilities/constants';
-import { RawRoute, FormattedNode } from '../utilities/types';
+import { Url } from '../../utilities/constants';
+import { RawRoute, FormattedNode } from '../../utilities/types';
 import { Header } from './header';
 import { default as MapAction } from '../../flux/actions/map';
 import { default as MapStore } from '../../flux/stores/map';

@@ -1,6 +1,6 @@
 import { default as React, Component } from 'react';
 import { default as styled } from 'styled-components';
-import { AuthLabel } from '../utilities/types';
+import { AuthLabel } from '../../utilities/types';
 
 interface Props {
   enLabel: AuthLabel;

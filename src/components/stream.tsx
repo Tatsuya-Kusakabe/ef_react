@@ -1,7 +1,7 @@
 import { default as React, Component } from 'react';
 import { default as styled } from 'styled-components';
-import { Host, TimeDiff } from '../utilities/constants';
-import { PostWithUser } from './../utilities/types';
+import { Host, TimeDiff } from '../../utilities/constants';
+import { PostWithUser } from '../../utilities/types';
 
 interface Props {
   posts: PostWithUser[];

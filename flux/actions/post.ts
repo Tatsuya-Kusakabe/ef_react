@@ -1,8 +1,8 @@
 import { default as axios } from 'axios';
 import { camelizeKeys } from 'humps';
 import { Dispatcher } from '../dispatcher';
-import { ActionTypes, Host } from '../../src/utilities/constants';
-import { RawPost, RawUser, PostWithUser } from '../../src/utilities/types';
+import { ActionTypes, Host } from '../../utilities/constants';
+import { RawPost, RawUser, PostWithUser } from '../../utilities/types';
 
 interface FetchPostsAction {
   type: typeof ActionTypes.POST__FETCH_POSTS;

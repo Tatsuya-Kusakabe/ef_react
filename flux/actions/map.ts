@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { default as axios } from 'axios';
 import { Dispatcher } from '../dispatcher';
-import { ActionTypes, Host, env } from '../../src/utilities/constants';
-import { RawRoute, RawRouteNode, RawNode, FormattedNode } from '../../src/utilities/types';
+import { ActionTypes, Host, env } from '../../utilities/constants';
+import { RawRoute, RawRouteNode, RawNode, FormattedNode } from '../../utilities/types';
 
 interface FetchAllRoutesAction {
   type: typeof ActionTypes.MAP__FETCH_ALL_ROUTES;

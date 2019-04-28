@@ -1,7 +1,7 @@
 import { Dispatcher } from '../dispatcher';
 import { BaseStore } from '../base_store';
-import { ActionTypes } from '../../src/utilities/constants';
-import { Action, PostWithUser } from '../../src/utilities/types';
+import { ActionTypes } from '../../utilities/constants';
+import { Action, PostWithUser } from '../../utilities/types';
 
 class BasePostStore extends BaseStore {
   getPosts(): PostWithUser[] {

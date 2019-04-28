@@ -1,8 +1,8 @@
 import { default as store } from 'store';
 import { Dispatcher } from '../dispatcher';
 import { BaseStore } from '../base_store';
-import { ActionTypes } from '../../src/utilities/constants';
-import { Action, Jwt } from '../../src/utilities/types';
+import { ActionTypes } from '../../utilities/constants';
+import { Action, Jwt } from '../../utilities/types';
 
 class BaseAuthStore extends BaseStore {
   getJwtObj(): Jwt {

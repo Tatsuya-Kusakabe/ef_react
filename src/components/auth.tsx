@@ -1,6 +1,6 @@
 import { default as React, Component } from 'react';
 import { default as styled } from 'styled-components';
-import { AuthLabel as Label } from '../utilities/types';
+import { AuthLabel as Label } from '../../utilities/types';
 import { Header } from './header';
 import { Input } from './input';
 import { Button } from './button';

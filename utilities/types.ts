@@ -1,7 +1,7 @@
-import { AuthAction } from '../../flux/actions/auth';
-import { FlashAction } from '../../flux/actions/flash';
-import { PostAction } from '../../flux/actions/post';
-import { MapAction } from '../../flux/actions/map';
+import { AuthAction } from '../flux/actions/auth';
+import { FlashAction } from '../flux/actions/flash';
+import { PostAction } from '../flux/actions/post';
+import { MapAction } from '../flux/actions/map';
 
 export type Action = AuthAction
   | FlashAction

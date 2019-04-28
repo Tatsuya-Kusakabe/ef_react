@@ -2,7 +2,7 @@ import { default as React, Component } from 'react';
 import { default as styled } from 'styled-components';
 import { Header } from './header';
 import { Stream } from './stream';
-import { PostWithUser } from './../utilities/types';
+import { PostWithUser } from '../../utilities/types';
 import { default as PostAction } from '../../flux/actions/post';
 import { default as PostStore } from '../../flux/stores/post';
 
