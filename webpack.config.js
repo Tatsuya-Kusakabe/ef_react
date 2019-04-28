@@ -14,9 +14,9 @@ module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
 
-  // webpack 4 のデフォルト値 ... context: src, entry: src/index.tsx, output: dist/main.js
-  // src/index.tsx を起点にビルドし、結果は dist/bundle.js に出力
-  entry: './src/index.tsx',
+  // webpack 4 のデフォルト値 ... context: views, entry: views/index.tsx, output: dist/main.js
+  // views/index.tsx を起点にビルドし、結果は dist/bundle.js に出力
+  entry: './views/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js?[hash]'
@@ -28,9 +28,9 @@ module.exports = {
   },
 
   plugins: [
-    // tsx -> js と同様に、src/index.html から、デプロイ用の dist/index.html を作成
+    // tsx -> js と同様に、views/index.html から、デプロイ用の dist/index.html を作成
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './views/index.html'
     }),
     // .env をビルド時に読み込ませる
     // (http://hinoshita.hatenadiary.com/entry/2017/09/17/143445)

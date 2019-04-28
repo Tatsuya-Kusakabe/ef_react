@@ -1,9 +1,9 @@
 import { default as React, Component } from 'react';
 import { default as styled } from 'styled-components';
 import { AuthLabel as Label } from '../../utilities/types';
-import { Header } from './header';
-import { Input } from './input';
-import { Button } from './button';
+import { Header } from '../shared/header';
+import { Input } from '../shared/input';
+import { Button } from '../shared/button';
 import { default as AuthAction } from '../../flux/actions/auth';
 import { default as FlashAction } from '../../flux/actions/flash';
 
@@ -18,7 +18,7 @@ interface State {
   passwordConf: string;
 }
 
-export class Auth extends Component<Props, State> {
+export class AuthIndex extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { name: '', email: '', password: '', passwordConf: '' };

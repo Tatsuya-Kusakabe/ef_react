@@ -2,7 +2,7 @@ import { default as React, Component } from 'react';
 import { default as styled } from 'styled-components';
 import { Url } from '../../utilities/constants';
 import { RawRoute, FormattedNode } from '../../utilities/types';
-import { Header } from './header';
+import { Header } from '../shared/header';
 import { default as MapAction } from '../../flux/actions/map';
 import { default as MapStore } from '../../flux/stores/map';
 
@@ -24,7 +24,7 @@ interface Window {
 // window.document などした時に怒られないように、window: Window を定義
 declare const window: Window;
 
-export class Map extends Component<Props, State> {
+export class MapIndex extends Component<Props, State> {
   // 右記参照 (https://stackoverflow.com/questions/48493960/)
 
   onChangeHandler: () => void;
