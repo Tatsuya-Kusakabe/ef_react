@@ -1,4 +1,4 @@
-import { default as request } from 'superagent';
+import { default as axios } from 'axios';
 import { Dispatcher } from '../dispatcher';
 import { ActionTypes, Host, env } from '../../src/utilities/constants';
 import { Flash, Jwt } from '../../src/utilities/types';
@@ -28,13 +28,11 @@ export type AuthAction =
 
 export default {
   signUp(name: string, email: string, password: string): void {
-    request
-      .post(`${Host.node[env]}/auth/sign_up`)
-      .send({ name, email, password })
-      .end((err: any, res: any) => {
-        if (err) console.log(err);
+    axios
+      .post(`${Host.node[env]}/auth/sign_up`, { name, email, password })
+      .then((res: any) => {
+        const { token, message } = res.data;
 
-        const { token, message } = JSON.parse(res.text);
         Dispatcher.handleServerAction({
           token,
           message: { auth: message },
@@ -44,17 +42,16 @@ export default {
         // 認証が完了すれば、トップ画面へリダイレクト
         // (https://stackoverflow.com/questions/42701129/)
         if (token) history.push('./map');
-      });
+      })
+      .catch((err: any) => console.log(err));
   },
 
   signIn(email: string, password: string): void {
-    request
-      .post(`${Host.node[env]}/auth/sign_in`)
-      .send({ email, password })
-      .end((err: any, res: any) => {
-        if (err) console.log(err);
+    axios
+      .post(`${Host.node[env]}/auth/sign_in`, { email, password })
+      .then((res: any) => {
+        const { token, message } = res.data;
 
-        const { token, message } = JSON.parse(res.text);
         Dispatcher.handleServerAction({
           token,
           message: { auth: message },
@@ -62,22 +59,23 @@ export default {
         });
 
         if (token) history.push('./map');
-      });
+      })
+      .catch((err: any) => console.log(err));
   },
 
   signOut(): void {
-    request
+    axios
       .get(`${Host.node[env]}/auth/sign_out`)
-      .end((err: any, res: any) => {
-        if (err) console.log(err);
+      .then((res: any) => {
+        const { message } = res.data;
 
-        const { message } = JSON.parse(res.text);
         Dispatcher.handleServerAction({
           message: { auth: message },
           type: ActionTypes.AUTH__SIGN_OUT,
         });
 
         history.push('./sign_in');
-      });
+      })
+      .catch((err: any) => console.log(err));
   },
 };
