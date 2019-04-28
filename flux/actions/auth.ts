@@ -1,16 +1,18 @@
 import { default as request } from 'superagent';
 import { Dispatcher } from '../dispatcher';
 import { ActionTypes, Host, env } from '../../src/utilities/constants';
-import { Flash } from '../../src/utilities/types';
+import { Flash, Jwt } from '../../src/utilities/types';
 import { default as history } from '../../src/utilities/history';
 
 interface SignUpAction {
   type: typeof ActionTypes.AUTH__SIGN_UP;
+  token: Jwt;
   message: Flash;
 }
 
 interface SignInAction {
   type: typeof ActionTypes.AUTH__SIGN_IN;
+  token: Jwt;
   message: Flash;
 }
 
@@ -32,15 +34,16 @@ export default {
       .end((err: any, res: any) => {
         if (err) console.log(err);
 
-        const { user, message } = JSON.parse(res.text);
+        const { token, message } = JSON.parse(res.text);
         Dispatcher.handleServerAction({
+          token,
           message: { auth: message },
           type: ActionTypes.AUTH__SIGN_UP,
         });
 
-        // ユーザが見つかれば、トップ画面へリダイレクト
+        // 認証が完了すれば、トップ画面へリダイレクト
         // (https://stackoverflow.com/questions/42701129/)
-        if (user) history.push('./map');
+        if (token) history.push('./map');
       });
   },
 
@@ -51,13 +54,14 @@ export default {
       .end((err: any, res: any) => {
         if (err) console.log(err);
 
-        const { user, message } = JSON.parse(res.text);
+        const { token, message } = JSON.parse(res.text);
         Dispatcher.handleServerAction({
+          token,
           message: { auth: message },
           type: ActionTypes.AUTH__SIGN_IN,
         });
 
-        if (user) history.push('./map');
+        if (token) history.push('./map');
       });
   },
 

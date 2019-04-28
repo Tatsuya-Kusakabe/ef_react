@@ -70,6 +70,13 @@ export interface FormattedNode {
   nodeSequence: number;
 }
 
+export interface Jwt {
+  accessToken: string | null;
+  tokenType: string | null;
+  expiresIn: number | null;
+  expiresAt: number | null;
+}
+
 export type AuthLabel = 'name' | 'email' | 'password' | 'passwordConf';
 
 export type FlashKeys = 'auth';
