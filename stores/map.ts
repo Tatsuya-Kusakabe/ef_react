@@ -1,7 +1,7 @@
-import { Dispatcher } from '../dispatcher';
-import { BaseStore } from '../base_store';
-import { ActionTypes } from '../../utilities/constants';
-import { Action, RawRoute, FormattedNode } from '../../utilities/types';
+import { BaseStore } from './_base_store';
+import { Dispatcher } from '../actions/_dispatcher';
+import { ActionTypes } from '../utilities/constants';
+import { Action, RawRoute, FormattedNode } from '../utilities/types';
 
 class BaseMapStore extends BaseStore {
   getAllRoutes(): RawRoute[] {

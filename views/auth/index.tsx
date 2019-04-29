@@ -4,8 +4,8 @@ import { AuthLabel as Label } from '../../utilities/types';
 import { Header } from '../shared/header';
 import { Input } from '../shared/input';
 import { Button } from '../shared/button';
-import { default as AuthAction } from '../../flux/actions/auth';
-import { default as FlashAction } from '../../flux/actions/flash';
+import { default as AuthAction } from '../../actions/auth';
+import { default as FlashAction } from '../../actions/flash';
 
 interface Props {
   status: 'signIn' | 'signUp';

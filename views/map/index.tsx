@@ -3,8 +3,8 @@ import { default as styled } from 'styled-components';
 import { Url } from '../../utilities/constants';
 import { RawRoute, FormattedNode } from '../../utilities/types';
 import { Header } from '../shared/header';
-import { default as MapAction } from '../../flux/actions/map';
-import { default as MapStore } from '../../flux/stores/map';
+import { default as MapAction } from '../../actions/map';
+import { default as MapStore } from '../../stores/map';
 
 interface Props {}
 

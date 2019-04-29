@@ -1,7 +1,7 @@
 import { default as React, Component } from 'react';
 import { default as styled } from 'styled-components';
 import changeCase from 'change-case';
-import { default as FlashStore } from '../../flux/stores/flash';
+import { default as FlashStore } from '../../stores/flash';
 
 interface Props {}
 interface State {

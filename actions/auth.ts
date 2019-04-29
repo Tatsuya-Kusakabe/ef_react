@@ -1,8 +1,8 @@
 import { default as axios } from 'axios';
-import { Dispatcher } from '../dispatcher';
-import { ActionTypes, Host, env } from '../../utilities/constants';
-import { Flash, Jwt } from '../../utilities/types';
-import { default as history } from '../../utilities/history';
+import { Dispatcher } from './_dispatcher';
+import { ActionTypes, Host, env } from '../utilities/constants';
+import { Flash, Jwt } from '../utilities/types';
+import { default as history } from '../utilities/history';
 
 interface SignUpAction {
   type: typeof ActionTypes.AUTH__SIGN_UP;
