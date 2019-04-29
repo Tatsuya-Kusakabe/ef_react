@@ -17,6 +17,11 @@ class BaseAuthStore extends BaseStore {
   setJwtObj(jwt: Jwt): void {
     store.set('jwt', jwt);
   }
+
+  isAuthenticated(): boolean {
+    const jwtKey = this.getJwtObj();
+    return !!jwtKey.accessToken && !!jwtKey.expiresAt && Date.now() < jwtKey.expiresAt;
+  }
 }
 
 const AuthStore = new BaseAuthStore();
