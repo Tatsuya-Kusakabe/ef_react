@@ -23,6 +23,20 @@ export type MapAction =
   FetchAllRoutesAction
   | FetchAllNodesAction;
 
+// 一意な routeChunk の組合せを抽出する関数（参照ではなくプロパティが同じもの）
+const getRouteChunkSet = (rawNodes: RawNode[]): RouteChunk[] => {
+  const routeChunkO = rawNodes.reduce((accRouteChunkO: RouteChunk[], node) => {
+    const routeChunkI = node.RouteNodes.reduce((accRouteChunkI: RouteChunk[], node) => {
+      return accRouteChunkI.concat({
+        routeId: node.routeId, chunkSequence: node.chunkSequence,
+      });
+    }, []); // tslint:disable-line: align
+    return accRouteChunkO.concat(routeChunkI);
+  }, []); // tslint:disable-line: align
+
+  return _.uniqWith(routeChunkO, _.isEqual);
+};
+
 // routeChunk の中に node が存在すれば node を足して、存在しなければそのまま、accNode を返す関数
 const pushNodes = (accNode: FormattedNode[], node: RawNode, routeChunk: RouteChunk) => {
 
@@ -66,21 +80,8 @@ export default {
       .then((res: any) => {
         const rawNodes: RawNode[] = res.data;
 
-        // routeChunk の組合せを列挙
-        const routeChunkO: RouteChunk[] = rawNodes.reduce((accRouteChunkO: RouteChunk[], node) => {
-          const routeChunkI = node.RouteNodes.reduce((accRouteChunkI: RouteChunk[], node) => {
-            return accRouteChunkI.concat({
-              routeId: node.routeId, chunkSequence: node.chunkSequence,
-            });
-          }, []); // tslint:disable-line: align
-          return accRouteChunkO.concat(routeChunkI);
-        }, []); // tslint:disable-line: align
-
-        // 一意な routeChunk の組合せを抽出（参照ではなくプロパティが同じもの）
-        const routeChunkSet = _.uniqWith(routeChunkO, _.isEqual);
-
         // 一意な routeChunk に含まれる node を列挙し、nodeSequence で昇順に並べ替え
-        const formattedNodes: FormattedNode[][] = routeChunkSet.map((elem) => {
+        const formattedNodes: FormattedNode[][] = getRouteChunkSet(rawNodes).map((elem) => {
           return rawNodes
             .reduce((accNode: FormattedNode[], node) => pushNodes(accNode, node, elem), [])
             .sort((a: FormattedNode, b: FormattedNode) => a.nodeSequence - b.nodeSequence);
