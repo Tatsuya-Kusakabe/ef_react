@@ -1,6 +1,6 @@
 import { default as React, Component } from 'react';
 import { default as styled } from 'styled-components';
-import { Host, TimeDiff } from '../../utilities/constants';
+import { Host, env, TimeDiff } from '../../utilities/constants';
 import { PostWithUser } from '../../utilities/types';
 
 interface Props {
@@ -20,7 +20,7 @@ export class Stream extends Component<Props, State> {
           posts.map((post: PostWithUser) => {
             return (
               <Post key={post.id}>
-                <Icon src={`${Host.rails.dev}${post.image}`} />
+                <Icon src={`${Host.node[env]}${post.image}`} />
                 <Name>{post.name}</Name>
                 <Date>{TimeDiff(post.createdAt)}</Date>
                 <Text>{post.context}</Text>

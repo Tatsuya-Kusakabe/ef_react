@@ -1,7 +1,6 @@
 import { default as axios } from 'axios';
-import { camelizeKeys } from 'humps';
 import { Dispatcher } from './_dispatcher';
-import { ActionTypes, Host } from '../utilities/constants';
+import { ActionTypes, Host, env } from '../utilities/constants';
 import { RawPost, RawUser, PostWithUser } from '../utilities/types';
 
 interface FetchPostsAction {
@@ -15,15 +14,15 @@ export default {
   fetchPosts(): void {
     // 生の users を取ってくる
     axios
-      .get(`${Host.rails.dev}/users`)
+      .get(`${Host.node[env]}/users`)
       .then((res: any) => {
-        const rawUsers = camelizeKeys(res.data);
+        const rawUsers = res.data;
 
         // 生の microposts を取ってくる
         axios
-          .get(`${Host.rails.dev}/microposts`)
+          .get(`${Host.node[env]}/microposts`)
           .then((res: any) => {
-            const rawPosts = camelizeKeys(res.data);
+            const rawPosts = res.data;
 
             // 生の posts, users を組み合わせた、表示用のデータを作成する
             const postsWithUsers: PostWithUser[] = rawPosts.map((post: RawPost) => {
