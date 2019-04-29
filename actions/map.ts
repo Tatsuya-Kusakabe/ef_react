@@ -62,36 +62,44 @@ const pushNodes = (accNode: FormattedNode[], node: RawNode, routeChunk: RouteChu
 };
 
 export default {
-  fetchAllRoutes(): void {
-    axios
-      .get(`${Host.node[env]}/api/routes`)
-      .then((res: any) => {
-        Dispatcher.handleServerAction({
-          type: ActionTypes.MAP__FETCH_ALL_ROUTES,
-          data: res.data,
-        });
-      })
-      .catch((err: any) => console.log(err));
+  fetchAllRoutes(): Promise<any> {
+    return new Promise((resolve: any, reject: any) => {
+      axios
+        .get(`${Host.node[env]}/api/routes`)
+        .then((res: any) => {
+          Dispatcher.handleServerAction({
+            type: ActionTypes.MAP__FETCH_ALL_ROUTES,
+            data: res.data,
+          });
+
+          res.status === 200 ? resolve(res) : reject(res);
+        })
+        .catch((err: any) => console.log(err));
+    });
   },
 
-  fetchAllNodes(): void {
-    axios
-      .get(`${Host.node[env]}/api/nodes`)
-      .then((res: any) => {
-        const rawNodes: RawNode[] = res.data;
+  fetchAllNodes(): Promise<any> {
+    return new Promise((resolve: any, reject: any) => {
+      axios
+        .get(`${Host.node[env]}/api/nodes`)
+        .then((res: any) => {
+          const rawNodes: RawNode[] = res.data;
 
-        // 一意な routeChunk に含まれる node を列挙し、nodeSequence で昇順に並べ替え
-        const formattedNodes: FormattedNode[][] = getRouteChunkSet(rawNodes).map((elem) => {
-          return rawNodes
-            .reduce((accNode: FormattedNode[], node) => pushNodes(accNode, node, elem), [])
-            .sort((a: FormattedNode, b: FormattedNode) => a.nodeSequence - b.nodeSequence);
-        });
+          // 一意な routeChunk に含まれる node を列挙し、nodeSequence で昇順に並べ替え
+          const formattedNodes: FormattedNode[][] = getRouteChunkSet(rawNodes).map((elem) => {
+            return rawNodes
+              .reduce((accNode: FormattedNode[], node) => pushNodes(accNode, node, elem), [])
+              .sort((a: FormattedNode, b: FormattedNode) => a.nodeSequence - b.nodeSequence);
+          });
 
-        Dispatcher.handleServerAction({
-          type: ActionTypes.MAP__FETCH_ALL_NODES,
-          data: formattedNodes,
-        });
-      })
-      .catch((err: any) => console.log(err));
+          Dispatcher.handleServerAction({
+            type: ActionTypes.MAP__FETCH_ALL_NODES,
+            data: formattedNodes,
+          });
+
+          res.status === 200 ? resolve(res) : reject(res);
+        })
+        .catch((err: any) => console.log(err));
+    });
   },
 };
