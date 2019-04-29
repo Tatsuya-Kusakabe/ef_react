@@ -41,7 +41,7 @@ export default {
 
         // 認証が完了すれば、トップ画面へリダイレクト
         // (https://stackoverflow.com/questions/42701129/)
-        if (token) history.push('./map');
+        if (token) history.push('/');
       })
       .catch((err: any) => console.log(err));
   },
@@ -58,7 +58,7 @@ export default {
           type: ActionTypes.AUTH__SIGN_IN,
         });
 
-        if (token) history.push('./map');
+        if (token) history.push('/');
       })
       .catch((err: any) => console.log(err));
   },
