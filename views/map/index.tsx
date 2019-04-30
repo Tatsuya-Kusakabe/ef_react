@@ -9,7 +9,6 @@ import { default as MapStore } from '../../stores/map';
 interface Props {}
 
 interface State {
-  map: any;
   allRoutes: RawRoute[];
   allNodes: FormattedNode[][];
 }
@@ -31,7 +30,7 @@ export class MapIndex extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = { map: null, allNodes: [], allRoutes: [] };
+    this.state = { allNodes: [], allRoutes: [] };
     this.onChangeHandler = this.onChange.bind(this);
   }
 
@@ -62,14 +61,13 @@ export class MapIndex extends Component<Props, State> {
   }
 
   initializeGoogleMaps() {
-    const map = new window.google.maps.Map(document.getElementById('map'), {
+    return new window.google.maps.Map(document.getElementById('map'), {
       zoom: 5,
       center: { lat: 38.4, lng: 138.1 },
     });
-    this.setState({ map });
   }
 
-  addPolylinesToGoogleMaps() {
+  addPolylinesToGoogleMaps(initMap: any) {
     const { allNodes } = this.state;
 
     allNodes.forEach((routeChunk: FormattedNode[]) => {
@@ -88,23 +86,16 @@ export class MapIndex extends Component<Props, State> {
       });
 
       // map に polyline を配置する
-      rawPolylines.setMap(this.state.map);
+      rawPolylines.setMap(initMap);
     });
   }
 
   componentDidMount() {
-    MapAction.fetchAllNodes();
-    MapAction.fetchAllRoutes();
-
-    this.fetchGoogleMaps().then(google => this.initializeGoogleMaps());
-
-    MapStore.onChange(this.onChangeHandler);
-  }
-
-  componentDidUpdate(prevState: State) {
-    if (this.state.allNodes.length && this.state.allNodes !== prevState.allNodes) {
-      this.addPolylinesToGoogleMaps();
-    }
+    this.fetchGoogleMaps()
+      .then(() => MapAction.fetchAllNodes())
+      .then(() => MapAction.fetchAllRoutes())
+      .then(() => this.initializeGoogleMaps())
+      .then((initMap: any) => this.addPolylinesToGoogleMaps(initMap));
 
     MapStore.onChange(this.onChangeHandler);
   }
