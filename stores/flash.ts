@@ -16,7 +16,10 @@ class BaseFlashStore extends BaseStore {
       return Object.keys(selfFlash)[0] === `${key}`;
     });
 
-    return (!!focusedFlash) ? focusedFlash[key] : null;
+    // 一度 return したら flash を初期化する
+    const cachedFlash = (!!focusedFlash) ? focusedFlash[key] : null;
+    this.setFlash({ [key]: null });
+    return cachedFlash;
   }
 
   setFlash(passedFlash: Flash): void {
