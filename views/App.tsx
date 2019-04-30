@@ -36,7 +36,7 @@ const RouteAfterAuth = ({ exact, path, component: Component, ...rest }: any) => 
         AuthStore.isAuthenticated() ? (
           <Component {...rest} {...props} />
         ) : (
-          <Redirect to={'/sign_in'} />
+          <Redirect to={{ pathname: '/sign_in', state: { from: props.location } }} />
         )
       }
     />

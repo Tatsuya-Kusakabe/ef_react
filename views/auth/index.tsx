@@ -1,5 +1,6 @@
 import { default as React, Component } from 'react';
 import { default as styled } from 'styled-components';
+import { default as _ } from 'lodash';
 import { AuthLabel as Label } from '../../utilities/types';
 import { Header } from '../shared/header';
 import { Input } from '../shared/input';
@@ -8,6 +9,9 @@ import { default as AuthAction } from '../../actions/auth';
 import { default as FlashAction } from '../../actions/flash';
 
 interface Props {
+  match?: { [key: string]: any };
+  history?: { [key: string]: any };
+  location?: { [key: string]: any };
   status: 'signIn' | 'signUp';
 }
 
@@ -28,6 +32,18 @@ export class AuthIndex extends Component<Props, State> {
     return (this.props.status === 'signUp')
       ? ['name', 'email', 'password', 'passwordConf']
       : ['email', 'password'];
+  }
+
+  componentDidMount() {
+    const { location } = this.props;
+
+    const prevPath = _.get(location, ['state', 'from', 'pathname']);
+    const pathAfterAuth = ['/', '/post'];
+
+    // RouteAfterAuth からリダイレクトされた場合、フラッシュを設定
+    if (pathAfterAuth.includes(prevPath)) {
+      FlashAction.setFlash({ auth: 'ログインしてください。' });
+    }
   }
 
   onSubmit(): void {
