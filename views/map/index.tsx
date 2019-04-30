@@ -26,12 +26,12 @@ declare const window: Window;
 export class MapIndex extends Component<Props, State> {
   // 右記参照 (https://stackoverflow.com/questions/48493960/)
 
-  onChangeHandler: () => void;
+  onStoreChangeHandler: () => void;
 
   constructor(props: Props) {
     super(props);
     this.state = { allNodes: [], allRoutes: [] };
-    this.onChangeHandler = this.onChange.bind(this);
+    this.onStoreChangeHandler = this.onStoreChange.bind(this);
   }
 
   getStateFromStore() {
@@ -97,14 +97,14 @@ export class MapIndex extends Component<Props, State> {
       .then(() => this.initializeGoogleMaps())
       .then((initMap: any) => this.addPolylinesToGoogleMaps(initMap));
 
-    MapStore.onChange(this.onChangeHandler);
+    MapStore.onChange(this.onStoreChangeHandler);
   }
 
   componentWillUnmount() {
-    MapStore.offChange(this.onChangeHandler);
+    MapStore.offChange(this.onStoreChangeHandler);
   }
 
-  onChange() {
+  onStoreChange() {
     this.setState(this.getStateFromStore());
   }
 
