@@ -17,7 +17,7 @@ const RouteBeforeAuth = ({ exact, path, component: Component, ...rest }: any) =>
       path={path}
       render={(props: any) =>
         AuthStore.isAuthenticated() ? (
-          <Redirect to={'/'} />
+          <Redirect to={{ pathname: '/', state: { from: props.location } }} />
         ) : (
           <Component {...rest} {...props} />
         )

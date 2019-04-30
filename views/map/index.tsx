@@ -1,16 +1,23 @@
 import { default as React, Component } from 'react';
 import { default as styled } from 'styled-components';
+import { default as _ } from 'lodash';
 import { Url } from '../../utilities/constants';
 import { RawRoute, FormattedNode } from '../../utilities/types';
 import { Header } from '../shared/header';
 import { default as MapAction } from '../../actions/map';
 import { default as MapStore } from '../../stores/map';
+import { default as FlashAction } from '../../actions/flash';
 
-interface Props {}
+interface Props {
+  match: { [key: string]: any };
+  history: { [key: string]: any };
+  location: { [key: string]: any };
+}
 
 interface State {
   allRoutes: RawRoute[];
   allNodes: FormattedNode[][];
+  isFlashReady: boolean;
 }
 
 // window.document などした時に怒られないように、window: Window を定義
@@ -30,7 +37,7 @@ export class MapIndex extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = { allNodes: [], allRoutes: [] };
+    this.state = { allNodes: [], allRoutes: [], isFlashReady: false };
     this.onStoreChangeHandler = this.onStoreChange.bind(this);
   }
 
@@ -95,7 +102,23 @@ export class MapIndex extends Component<Props, State> {
       .then(() => MapAction.fetchAllNodes())
       .then(() => MapAction.fetchAllRoutes())
       .then(() => this.initializeGoogleMaps())
-      .then((initMap: any) => this.addPolylinesToGoogleMaps(initMap));
+      .then((initMap: any) => this.addPolylinesToGoogleMaps(initMap))
+      .then(() => this.setState({ isFlashReady: true }));
+
+    MapStore.onChange(this.onStoreChangeHandler);
+  }
+
+  componentDidUpdate() {
+    const { isFlashReady } = this.state;
+    const { location } = this.props;
+
+    const prevPath = _.get(location, ['state', 'from', 'pathname']);
+    const pathBeforeAuth = ['/sign_in', '/sign_up'];
+
+    // RouteBeforeAuth からリダイレクトされた場合、フラッシュを設定
+    if (isFlashReady && pathBeforeAuth.includes(prevPath)) {
+      FlashAction.setFlash({ auth: '既にログインしています。' });
+    }
 
     MapStore.onChange(this.onStoreChangeHandler);
   }
