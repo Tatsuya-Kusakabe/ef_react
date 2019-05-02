@@ -24,7 +24,7 @@
     "store": "^2.0.12"
   },
   "scripts": {
-    "start": "webpack-dev-server --history-api-fallback --https --open 'Google Chrome' $npm_package_config_ca",
+    "start": "webpack --watch & webpack-dev-server --history-api-fallback --https $npm_package_config_ca",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
