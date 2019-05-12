@@ -18,7 +18,7 @@ export const env = process.env.NODE_ENV || 'development';
 
 export const Host: Host = {
   node:  { development: 'https://api.expwy-footprints.com' },
-  react: { development: 'https://expwy-footprints.com' },
+  react: { development: 'https://app.expwy-footprints.com' },
 };
 
 const UrlBase = {
