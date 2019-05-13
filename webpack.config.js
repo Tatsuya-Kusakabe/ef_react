@@ -2,6 +2,7 @@
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   // webpack 4 のデフォルト値 ... context: views, entry: views/index.tsx, output: dist/main.js
@@ -23,7 +24,11 @@ module.exports = {
     // tsx -> js と同様に、views/index.html から、デプロイ用の dist/index.html を作成
     new HtmlWebpackPlugin({
       template: './views/index.html'
-    })
+    }),
+    // docker-compose に加えて webpack でも指定しないと環境変数を読み込めない（原因は不明）
+    // (https://stackoverflow.com/questions/55277860/)
+    // (https://webpack.js.org/plugins/environment-plugin/)
+    new webpack.EnvironmentPlugin(['GOOGLE_MAPS_KEY'])
   ],
 
   module: {

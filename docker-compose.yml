@@ -1,0 +1,39 @@
+# カスタムネットワークに名前をつけられるのは ver 3.5 から
+# (https://docs.docker.com/compose/networking/#specify-custom-networks)
+version: '3.5'
+
+# 基本設定はこちら
+# (https://hub.docker.com/r/jwilder/nginx-proxy/)
+services:
+  react:
+    build:
+      context: .
+      dockerfile: docker.react.dockerfile
+      target: dev
+
+    image: ef_react:dev
+    container_name: ef_react
+
+    networks:
+      - expwy_footprints
+
+    # 開発環境用のビルドは bind mount を使い、ホストの変更を即座にローカルに反映させる
+    # (https://hackernoon.com/how-to-move-code-into-a-docker-container-ab28edcc2901)
+    volumes:
+      - .:/app
+
+    environment:
+      NETWORK_ACCESS: internal
+      VIRTUAL_HOST: app.expwy-footprints.com
+      VIRTUAL_PORT: 8080
+
+      # '.env' で定義した環境変数を読み込む
+      # ** (https://docs.docker.com/compose/environment-variables/#the-env-file)
+      GOOGLE_MAPS_KEY: "${GOOGLE_MAPS_KEY}"
+
+# expwy_footprints コンテナとネットワークを共有
+# (https://github.com/jwilder/nginx-proxy/issues/644)
+# (https://docs.docker.com/compose/networking/#use-a-pre-existing-network)
+networks:
+  expwy_footprints:
+    external: true

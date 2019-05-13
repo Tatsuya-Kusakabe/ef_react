@@ -1,0 +1,20 @@
+# こちらを参照 (https://hackernoon.com/how-to-move-code-into-a-docker-container-ab28edcc2901)
+
+# dependencies
+/node_modules
+
+# production
+/dist
+
+# git
+.git/
+.gitignore
+
+# docker
+*.dockerfile
+docker-compose.yml
+.dockerignore
+
+# secret
+.env
+.env.*
