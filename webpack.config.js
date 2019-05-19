@@ -3,9 +3,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path');
 
-const webpack = require("webpack")
-require('dotenv').config();
-
 module.exports = {
   // ソースマップ付きで js が出力されるため、コンパイル後のファイルからコンパイル前のファイルを追跡可能になり、デバッグが容易に
   // (https://ics.media/entry/16329#webpack-ts-react)
@@ -33,13 +30,6 @@ module.exports = {
     // tsx -> js と同様に、views/index.html から、デプロイ用の dist/index.html を作成
     new HtmlWebpackPlugin({
       template: './views/index.html'
-    }),
-    // .env をビルド時に読み込ませる
-    // (http://hinoshita.hatenadiary.com/entry/2017/09/17/143445)
-    new webpack.DefinePlugin({
-      'process.env': {
-        'GOOGLE_MAPS_KEY': JSON.stringify(process.env.GOOGLE_MAPS_KEY)
-      }
     })
   ],
 
