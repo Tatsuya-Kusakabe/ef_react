@@ -4,13 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path');
 
 module.exports = {
-  // ソースマップ付きで js が出力されるため、コンパイル後のファイルからコンパイル前のファイルを追跡可能になり、デバッグが容易に
-  // (https://ics.media/entry/16329#webpack-ts-react)
-  // (https://qiita.com/pegass85/items/4bd80828f95ef13d6159)
-  // (http://chuckwebtips.hatenablog.com/entry/2016/03/02/000000)
-  mode: 'development',
-  devtool: 'inline-source-map',
-
   // webpack 4 のデフォルト値 ... context: views, entry: views/index.tsx, output: dist/main.js
   // views/index.tsx を起点にビルドし、結果は dist/bundle.js に出力
   // webpack --watch を指定しないと、変更時に dist/bundle.js が更新されない
@@ -32,19 +25,6 @@ module.exports = {
       template: './views/index.html'
     })
   ],
-
-  // 主な設定はこちらを参照 (https://qiita.com/riversun/items/d27f6d3ab7aaa119deab)
-  // ssl の設定はこちらを参照 (https://webpack.js.org/configuration/dev-server/#devserverhttps)
-  // key, cert は、webpack.config では読み込まれず、webpack-cli では読み込まれた（原因は不明）
-  // 外部アクセスの設定はこちらを参照 (https://webpack.js.org/configuration/dev-server/)
-  devServer: {
-    allowedHosts: ['app.expwy-footprints.com', 'react'],
-    host: '0.0.0.0',
-    port: 8080,
-    inline: true, // dist 内の js が変更されたら、コンパイルして、自動でブラウザをリロード
-    contentBase: path.resolve(__dirname, 'dist'),
-    watchContentBase: true, // dist 内の html, css が変更されても、自動でブラウザをリロード
-  },
 
   module: {
     rules: [{
