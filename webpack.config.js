@@ -42,10 +42,14 @@ module.exports = {
         typeCheck: true   // warning を消す (https://qiita.com/kurosame/items/3c28f45c8b2e65f5c69d)
       }
     }, {
-      test: /\.tsx?$/,                         // xxx.ts, xxx.tsx に対して
-      loader: 'ts-loader',                     // ts-loader を使ってトランスパイル
+      test: /\.tsx?$/,               // xxx.ts, xxx.tsx に対して
+      loader: 'ts-loader',           // ts-loader を使ってトランスパイル
       exclude: [/node_modules/],
-      options: { configFile: 'tsconfig.json' } // TypeScript のコンパイル設定ファイル
+      options: {
+        configFile: 'tsconfig.json', // TypeScript のコンパイル設定ファイル
+        transpileOnly: true,         // 以下二つで、差分ビルドの対象となるファイル数を減らす
+        experimentalWatchApi: true,  // (https://webpack.js.org/guides/build-performance/#typescript-loader)
+      }
     }]
   }
 };
