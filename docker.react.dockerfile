@@ -1,7 +1,10 @@
+# 下記を参照し dockerfile を改善
+# (https://pythonspeed.com/articles/dockerizing-python-is-hard/)
+
 ################################
 # node_modules を完成させるイメージ
 ################################
-FROM node:alpine as base
+FROM node:12.3-alpine as base
 
 # 先に npm install だけをしておき、リビルド時の差分を小さく
 # (https://y-ohgi.com/introduction-docker/3_production/dockerfile/)
@@ -28,7 +31,7 @@ LABEL cache_base_react=true
 ########################################
 # 開発環境用の server.js をビルドするイメージ
 ########################################
-FROM node:alpine as dev
+FROM node:12.3-alpine as dev
 
 # 開発環境用のビルドは、ファイルコピーではなく bind mount を使用
 # (https://hackernoon.com/how-to-move-code-into-a-docker-container-ab28edcc2901)
